@@ -12,5 +12,7 @@ namespace internet_sellings.entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        private int _id;
+        private string _name;
     }
 }

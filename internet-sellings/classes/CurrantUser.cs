@@ -11,17 +11,25 @@ namespace internet_sellings.classes
     {
         static private CurrantUser Instance;
         private CurrantUser() { }
-        private CurrantUser(int id, string name) {  }
+        private CurrantUser(User user) { 
+            this.Id = user.Id;
+            this.Name = user.Name;
+            this.Login = user.Login;
+            this.Role = user.Role;
+            this.Role_Id = user.Role_Id;
+        }
         new private string Login { get; set; }
         new private string Password { get; set; }
         static public CurrantUser AuthUser(User user)
         {
-            User result = Database
+            User result = ApplicationContext
                         .GetInstance()
                         .Users
                         .FirstOrDefault(rec => rec.Login == user.Login && rec.Password == user.Password);
 
-            Instance = result == null ? null : new CurrantUser(result.Id, result.Name);
+            Instance = result == null
+                ? null
+                : new CurrantUser(result);
 
             return Instance;
         }

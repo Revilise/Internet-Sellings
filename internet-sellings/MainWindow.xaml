@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:internet_sellings"
         xmlns:entities="clr-namespace:internet_sellings.entities"
         mc:Ignorable="d"
-        Title="Авторизация" Height="318" Width="479">
+        Title="Авторизация" Height="318" Width="479" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="contaier" Width="200" VerticalAlignment="Center">
         <StackPanel.DataContext>
             <entities:User />

@@ -22,11 +22,11 @@ namespace internet_sellings
     /// </summary>
     public partial class MainWindow : Window
     {
-        Database db;
+        ApplicationContext db;
         public MainWindow()
         {
             InitializeComponent();
-            db = Database.GetInstance();
+            db = ApplicationContext.GetInstance();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -39,7 +39,8 @@ namespace internet_sellings
 
                 if (user == null) throw new Exception("Неверный логин или пароль");
 
-                WindowFabric.CreateWindow(user.Role.Name).Show();
+                Role role = db.Roles.First(r => r.Id == user.Role_Id);
+                WindowFabric.CreateWindow(role.Name).Show();
             }
             catch (Exception ex)
             {

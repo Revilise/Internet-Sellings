@@ -12,9 +12,10 @@ namespace internet_sellings.entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int Order_Id { get; set; }
         [ForeignKey("Order_Id")]
         public Order Order { get; set; }
-        public DateTime Devivery_dt { get; set; }
+        public DateTime Delivery_dt { get; set; }
         public string Address { get; set; }
         public string Deliver_FullName { get; set; }
     }

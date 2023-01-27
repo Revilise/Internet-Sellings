@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:internet_sellings.windows"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="555" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Margin="32">
         <Grid.ColumnDefinitions>
            <ColumnDefinition Width="auto"/>
@@ -18,19 +18,134 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" FontSize="32" Grid.Column="0" FontWeight="Bold">Администратор</Label>
         <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
-            <Button Click="Logout_btn_Click" Padding="24, 8">Выйти</Button>
+            <Button Click="Logout_btn_Click" Padding="4" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Height="24" Source="/imgs/log-out.png" Stretch="Fill" Width="24"/>
+            </Button>
         </StackPanel>
-        <TabControl ItemsSource="{Binding TabViews}" SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Grid.Row="2">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Margin="4" Text="{Binding Header}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <DataGrid ItemsSource="{Binding Content}" />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
+        
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Grid.Row="2">
+            <TabItem Uid="users_tabitem">
+                <TabItem.Header>
+                    <TextBlock Margin="4">Пользователи</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid x:Name="dvg_1" AutoGenerateColumns="False" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Width="*" Header="Login" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Width="*" Header="Role Id" Binding="{Binding Role_Id}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Uid="roles_tabitem">
+                <TabItem.Header>
+                    <TextBlock Margin="4">Роли</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid x:Name="dvg_2" AutoGenerateColumns="False" ItemsSource="{Binding Roles, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Uid="orders_tabitem">
+                <TabItem.Header>
+                    <TextBlock Margin="4">Заказы</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid x:Name="dvg_3" AutoGenerateColumns="False" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                            <DataGridTemplateColumn Width="150" Header="created at">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Created_At, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding Created_At, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Width="*" Header="client fullname" Binding="{Binding Client_Fullname}"/>
+                            <DataGridTextColumn Width="*" Header="client phone" Binding="{Binding Client_Phone}"/>
+                            <DataGridCheckBoxColumn Width="100" Header="accepted" Binding="{Binding Accepted}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Uid="order_products_tabitem">
+                <TabItem.Header>
+                    <TextBlock Margin="4">Детали заказов</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid x:Name="dvg_4" AutoGenerateColumns="False" ItemsSource="{Binding Order_Products, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
+                                <DataGridTextColumn Width="*" Header="seller id" Binding="{Binding Seller_Id}"/>
+                                <DataGridTextColumn Width="100" Header="count" Binding="{Binding Count}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Uid="deliveries_tabitem">
+                <TabItem.Header>
+                    <TextBlock Margin="4">Доставка</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid x:Name="dvg_5" AutoGenerateColumns="False" ItemsSource="{Binding Deliveries, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="order_id" Binding="{Binding Order_Id}"/>
+                                <DataGridTemplateColumn Width="100" Header="delivery datetime">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Delivery_dt, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding Delivery_dt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="*" Header="client address" Binding="{Binding Address}"/>
+                                <DataGridTextColumn Width="100" Header="deliver" Binding="{Binding Deliver_FullName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
