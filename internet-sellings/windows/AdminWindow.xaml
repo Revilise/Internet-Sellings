@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:internet_sellings.windows"
+        xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="555" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Internet-Sellings - Administrator" Height="555" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <classes:EntityController />
+    </Window.DataContext>
     <Grid Margin="32">
         <Grid.ColumnDefinitions>
            <ColumnDefinition Width="auto"/>
@@ -23,8 +27,8 @@
             </Button>
         </StackPanel>
         
-        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Grid.Row="2">
-            <TabItem Uid="users_tabitem">
+        <TabControl Grid.ColumnSpan="3" Grid.Row="2">
+            <TabItem>
                 <TabItem.Header>
                     <TextBlock Margin="4">Пользователи</TextBlock>
                 </TabItem.Header>
@@ -33,18 +37,19 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
-                        <DataGrid x:Name="dvg_1" AutoGenerateColumns="False" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Width="*" Header="Login" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Width="*" Header="Password" Binding="{Binding Password}"/>
                                 <DataGridTextColumn Width="*" Header="Role Id" Binding="{Binding Role_Id}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </WrapPanel>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Uid="roles_tabitem">
+            <TabItem>
                 <TabItem.Header>
                     <TextBlock Margin="4">Роли</TextBlock>
                 </TabItem.Header>
@@ -53,7 +58,7 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
-                        <DataGrid x:Name="dvg_2" AutoGenerateColumns="False" ItemsSource="{Binding Roles, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Roles.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
@@ -62,7 +67,7 @@
                     </WrapPanel>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Uid="orders_tabitem">
+            <TabItem>
                 <TabItem.Header>
                     <TextBlock Margin="4">Заказы</TextBlock>
                 </TabItem.Header>
@@ -71,18 +76,18 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
-                        <DataGrid x:Name="dvg_3" AutoGenerateColumns="False" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Orders.BindingList}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                             <DataGridTemplateColumn Width="150" Header="created at">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Created_At, Mode=TwoWay}" />
+                                        <TextBlock Text="{Binding Created_dt, Mode=TwoWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Created_At, Mode=TwoWay}" />
+                                        <DatePicker SelectedDate="{Binding Created_dt, Mode=TwoWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -94,7 +99,7 @@
                     </WrapPanel>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Uid="order_products_tabitem">
+            <TabItem>
                 <TabItem.Header>
                     <TextBlock Margin="4">Детали заказов</TextBlock>
                 </TabItem.Header>
@@ -103,7 +108,7 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
-                        <DataGrid x:Name="dvg_4" AutoGenerateColumns="False" ItemsSource="{Binding Order_Products, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding OrderProducts.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
@@ -114,7 +119,7 @@
                     </WrapPanel>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Uid="deliveries_tabitem">
+            <TabItem>
                 <TabItem.Header>
                     <TextBlock Margin="4">Доставка</TextBlock>
                 </TabItem.Header>
@@ -123,24 +128,76 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
-                        <DataGrid x:Name="dvg_5" AutoGenerateColumns="False" ItemsSource="{Binding Deliveries, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="order_id" Binding="{Binding Order_Id}"/>
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding Delivery_dt, Mode=TwoWay}" />
+                                            <TextBlock Text="{Binding Delivery_dt, Mode=TwoWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                     <DataGridTemplateColumn.CellEditingTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Delivery_dt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DatePicker SelectedDate="{Binding Delivery_dt, Mode=TwoWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="client address" Binding="{Binding Address}"/>
                                 <DataGridTextColumn Width="100" Header="deliver" Binding="{Binding Deliver_FullName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Margin="4">Магазины</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Sellers.BindingList}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="email" Binding="{Binding Email}"/>
+                                <DataGridCheckBoxColumn MinWidth="100" Header="pay delivery" Binding="{Binding PayDeliviry}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Margin="4">Товары</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <WrapPanel>
+                        <StackPanel>
+                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Products.BindingList}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Width="*" Header="firm produced" Binding="{Binding Producer}"/>
+                                <DataGridTemplateColumn Width="*" Header="warrantry period">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Warrantry_period, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding Warrantry_period, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="*" Header="specification" Binding="{Binding Specifications}"/>
+                                <DataGridTextColumn Width="*" Header="image" Binding="{Binding Image}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </WrapPanel>

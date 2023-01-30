@@ -1,8 +1,8 @@
 ﻿using internet_sellings.classes;
 using internet_sellings.entities;
+using internet_sellings.entities.collections;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
@@ -20,20 +20,24 @@ using System.Windows.Shapes;
 namespace internet_sellings.windows
 {
     /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
+    /// Логика взаимодействия для OperatorWindow.xaml
     /// </summary>
-    public partial class AdminWindow : Window
+    public partial class OperatorWindow : Window
     {
         private ApplicationContext db;
-        public AdminWindow()
+        private EntityController EntityController { get; set; }
+        public OperatorWindow()
         {
             InitializeComponent();
             db = ApplicationContext.GetInstance();
+            this.EntityController = (EntityController)this.DataContext;
         }
+
         private void Logout_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
             try
@@ -46,6 +50,17 @@ namespace internet_sellings.windows
                 db.Rollback();
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+
+            BindingList<Delivery> d = new BindingList<Delivery>(
+                db.Deliveries.Where(x => x.Delivered && (bool)checkBox.IsChecked).ToList()
+            );
+
+            EntityController.Deliveries.BindingList = (bool)checkBox.IsChecked ? d : db.Deliveries.Local.ToBindingList();
         }
     }
 }

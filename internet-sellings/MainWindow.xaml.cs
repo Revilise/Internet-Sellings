@@ -2,6 +2,7 @@
 using internet_sellings.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace internet_sellings
         {
             InitializeComponent();
             db = ApplicationContext.GetInstance();
+            db.Users.Load();
+            db.Roles.Load();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)

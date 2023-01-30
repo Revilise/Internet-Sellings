@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace internet_sellings.db_model
+namespace internet_sellings.entities
 {
     public class Product
     {
@@ -15,8 +15,8 @@ namespace internet_sellings.db_model
         public string Name { get; set; }
         public string Producer { get; set; }
         public string Model { get; set; }
-        public DateTime warrantry_period { get; set; }
-        public string specifications { get; set; }
-        public string image { get; set; }
+        public DateTime Warrantry_period { get; set; }
+        public string Specifications { get; set; }
+        public string Image { get; set; }
     }
 }

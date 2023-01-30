@@ -17,6 +17,10 @@ namespace internet_sellings.classes
             {
                 case "admin": window = new AdminWindow();
                     break;
+                case "operator": window = new OperatorWindow();
+                    break;
+                case "deliverer": window = new DeliveryWindow();
+                    break;
                 default: throw new Exception("Unexpected user role: "+userRole);
             }
             return window;

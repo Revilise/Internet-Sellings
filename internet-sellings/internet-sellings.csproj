@@ -66,8 +66,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\EntityController.cs" />
+    <Compile Include="entities\collections\DeliveryCollection.cs" />
+    <Compile Include="entities\collections\IEFCollection.cs" />
+    <Compile Include="entities\collections\OrderCollection.cs" />
+    <Compile Include="entities\collections\OrderProductCollection.cs" />
+    <Compile Include="entities\collections\ProductCollection.cs" />
+    <Compile Include="entities\collections\RoleCollection.cs" />
+    <Compile Include="entities\collections\SellerCollection.cs" />
+    <Compile Include="entities\collections\UserCollection.cs" />
     <Compile Include="windows\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\DeliveryWindow.xaml.cs">
+      <DependentUpon>DeliveryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\OperatorWindow.xaml.cs">
+      <DependentUpon>OperatorWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +107,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="windows\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\DeliveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\OperatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
