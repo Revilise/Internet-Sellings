@@ -13,6 +13,14 @@ namespace internet_sellings.classes
     public class EntityController
     {
         ApplicationContext db;
+        private static EntityController _instance;
+        static public EntityController Instance { 
+            get
+            {
+                if (_instance == null) _instance = new EntityController();
+                return _instance;
+            }
+        }
         public EntityController()
         {
             db = ApplicationContext.GetInstance();

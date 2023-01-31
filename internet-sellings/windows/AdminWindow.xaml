@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
-        Title="Internet-Sellings - Administrator" Height="555" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Интернет-продажи. Администратор" Height="555" Width="800" WindowStartupLocation="CenterScreen" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
     </Window.DataContext>
@@ -39,7 +39,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Width="*" Header="Login" Binding="{Binding Login}"/>
                                 <DataGridTextColumn Width="*" Header="Password" Binding="{Binding Password}"/>
@@ -78,8 +84,14 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Orders.BindingList}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
-                            <DataGridTemplateColumn Width="150" Header="created at">
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" Header="created at">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Created_dt, Mode=TwoWay}" />
@@ -110,7 +122,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding OrderProducts.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
                                 <DataGridTextColumn Width="*" Header="seller id" Binding="{Binding Seller_Id}"/>
                                 <DataGridTextColumn Width="100" Header="count" Binding="{Binding Count}"/>
@@ -130,8 +148,14 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Width="*" Header="order_id" Binding="{Binding Order_Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Order_Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridComboBoxColumn Width="*" Header="order_id" ItemsSource="{Binding Orders.BindingList}" SelectedValueBinding="{Binding Order.Id}" />
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -162,7 +186,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Sellers.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="email" Binding="{Binding Email}"/>
                                 <DataGridCheckBoxColumn MinWidth="100" Header="pay delivery" Binding="{Binding PayDeliviry}"/>
                             </DataGrid.Columns>
@@ -181,7 +211,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Products.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="name" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Width="*" Header="firm produced" Binding="{Binding Producer}"/>
                                 <DataGridTemplateColumn Width="*" Header="warrantry period">

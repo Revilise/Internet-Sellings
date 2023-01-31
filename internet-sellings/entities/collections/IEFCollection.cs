@@ -31,6 +31,20 @@ namespace internet_sellings.entities.collections
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+        public void Search(Func<T, bool> predicate)
+        {
+            this.BindingList = new BindingList<T>(
+                this.BindingList.Where(predicate).ToList()
+            );
+        }
+        public void RefreshBindingList()
+        {
+            this.Entity.Load();
+
+            this.BindingList = new BindingList<T>(
+                this.Entity.Cast<T>().ToList()
+            );
+        }
 
         private BindingList<T> _bindingList;
     }

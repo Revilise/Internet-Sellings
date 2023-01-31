@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:internet_sellings"
         xmlns:entities="clr-namespace:internet_sellings.entities"
         mc:Ignorable="d"
-        Title="Авторизация" Height="318" Width="479" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Интернет-продажи. Авторизация" Height="318" Width="479" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/imgs/internet.ico">
     <StackPanel x:Name="contaier" Width="200" VerticalAlignment="Center">
         <StackPanel.DataContext>
             <entities:User />
@@ -15,6 +15,6 @@
         <TextBox TextWrapping="NoWrap" Text="{Binding Login}"/>
         <Label>Пароль</Label>
         <TextBox TextWrapping="NoWrap" Text="{Binding Password}"/>
-        <Button Click="Submit_Click"  Margin="0, 8, 0, 0">Войти</Button>
+        <Button Padding="4" FontWeight="Bold" FontFamily="Calibri" Background="#FF339AF0" BorderBrush="#FF339AF0" Foreground="Black" Click="Submit_Click"  Margin="0, 8, 0, 0">Войти</Button>
     </StackPanel>
 </Window>

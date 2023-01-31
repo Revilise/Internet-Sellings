@@ -43,7 +43,10 @@ namespace internet_sellings
                 if (user == null) throw new Exception("Неверный логин или пароль");
 
                 Role role = db.Roles.First(r => r.Id == user.Role_Id);
-                WindowFabric.CreateWindow(role.Name).Show();
+                Window window = WindowFabric.CreateWindow(role.Name);
+                window.Owner = this;
+                window.Show();
+                this.Hide();
             }
             catch (Exception ex)
             {

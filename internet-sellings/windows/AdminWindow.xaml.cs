@@ -33,6 +33,7 @@ namespace internet_sellings.windows
         private void Logout_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Owner.Show();
         }
         private void SaveChanges(object sender, RoutedEventArgs e)
         {

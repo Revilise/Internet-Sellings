@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
-        Title="DeliveryWindow" Height="450" Width="800">
+        Title="Интернет-продажи. Курьер" Height="450" WindowStartupLocation="CenterScreen" Width="800" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
     </Window.DataContext>
@@ -45,9 +45,15 @@
                             </StackPanel>
                         </Grid>
 
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
+                        <DataGrid x:Name="dvg" AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="order_id" Binding="{Binding Order_Id}"/>
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -64,6 +70,15 @@
                                 <DataGridTextColumn Width="*" Header="client address" Binding="{Binding Address}"/>
                                 <DataGridTextColumn Width="100" Header="deliver" Binding="{Binding Deliver_FullName}"/>
                                 <DataGridCheckBoxColumn Width="100" Header="delivered" Binding="{Binding Delivered}" />
+                                <DataGridTemplateColumn Header="" Width="24">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="SaveCurrantRowToPdf_Click" Background="{x:Null}">
+                                                <Image Height="16" Source="/imgs/download.png" Stretch="Fill" Width="16"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>

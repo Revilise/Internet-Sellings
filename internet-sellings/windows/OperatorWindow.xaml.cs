@@ -36,6 +36,7 @@ namespace internet_sellings.windows
         private void Logout_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Owner.Show();
         }
 
         private void SaveChanges(object sender, RoutedEventArgs e)
@@ -55,12 +56,14 @@ namespace internet_sellings.windows
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
+            
+            if ((bool)checkBox.IsChecked)
+            {
+                EntityController.Deliveries.Search(x => x.Delivered && (bool)checkBox.IsChecked);
+                return;
+            }
 
-            BindingList<Delivery> d = new BindingList<Delivery>(
-                db.Deliveries.Where(x => x.Delivered && (bool)checkBox.IsChecked).ToList()
-            );
-
-            EntityController.Deliveries.BindingList = (bool)checkBox.IsChecked ? d : db.Deliveries.Local.ToBindingList();
+            EntityController.Deliveries.RefreshBindingList();
         }
     }
 }

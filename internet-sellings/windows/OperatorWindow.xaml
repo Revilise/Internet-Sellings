@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
-        Title="Internet-Sellings - Operator" Height="450" Width="800">
+        Title="Интернет продажи. Оператор" Height="450" WindowStartupLocation="CenterScreen" Width="800" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
     </Window.DataContext>
@@ -38,7 +38,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="false" ItemsSource="{Binding Orders.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}" />
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn  Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -70,7 +76,13 @@
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding OrderProducts.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
                                 <DataGridTextColumn Width="*" Header="seller id" Binding="{Binding Seller_Id}"/>
                                 <DataGridTextColumn Width="100" Header="count" Binding="{Binding Count}"/>
@@ -99,7 +111,13 @@
                             
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
+                                <DataGridTemplateColumn Width="50" Header="id">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="*" Header="order_id" Binding="{Binding Order_Id}"/>
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
