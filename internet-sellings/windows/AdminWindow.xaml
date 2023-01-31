@@ -10,6 +10,9 @@
     <Window.DataContext>
         <classes:EntityController />
     </Window.DataContext>
+    <Window.Resources>
+        <CollectionViewSource x:Key="Orders_Items" Source="{Binding Orders.BindingList}" />
+    </Window.Resources>
     <Grid Margin="32">
         <Grid.ColumnDefinitions>
            <ColumnDefinition Width="auto"/>
@@ -33,10 +36,22 @@
                     <TextBlock Margin="4">Пользователи</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -52,7 +67,7 @@
                                 <DataGridTextColumn Width="*" Header="Role Id" Binding="{Binding Role_Id}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </WrapPanel>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -60,17 +75,29 @@
                     <TextBlock Margin="4">Роли</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Roles.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </WrapPanel>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -78,12 +105,24 @@
                     <TextBlock Margin="4">Заказы</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Orders.BindingList}">
-                        <DataGrid.Columns>
+                            <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -92,23 +131,23 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Width="150" Header="created at">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Created_dt, Mode=TwoWay}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Created_dt, Mode=TwoWay}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Width="*" Header="client fullname" Binding="{Binding Client_Fullname}"/>
-                            <DataGridTextColumn Width="*" Header="client phone" Binding="{Binding Client_Phone}"/>
-                            <DataGridCheckBoxColumn Width="100" Header="accepted" Binding="{Binding Accepted}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    </WrapPanel>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Created_dt, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding Created_dt, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="*" Header="client fullname" Binding="{Binding Client_Fullname}"/>
+                                <DataGridTextColumn Width="*" Header="client phone" Binding="{Binding Client_Phone}"/>
+                                <DataGridCheckBoxColumn Width="100" Header="accepted" Binding="{Binding Accepted}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -129,6 +168,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                <DataGridComboBoxColumn Width="*" Header="order_id" SelectedItemBinding="{Binding Order}" />
                                 <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
                                 <DataGridTextColumn Width="*" Header="seller id" Binding="{Binding Seller_Id}"/>
                                 <DataGridTextColumn Width="100" Header="count" Binding="{Binding Count}"/>
@@ -142,20 +182,32 @@
                     <TextBlock Margin="4">Доставка</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Order_Id}" />
+                                            <TextBlock Text="{Binding Id}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridComboBoxColumn Width="*" Header="order_id" ItemsSource="{Binding Orders.BindingList}" SelectedValueBinding="{Binding Order.Id}" />
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Orders_Items}}" SelectedItemBinding="{Binding Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="order_id"/>
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -172,7 +224,7 @@
                                 <DataGridTextColumn Width="100" Header="deliver" Binding="{Binding Deliver_FullName}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </WrapPanel>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -180,10 +232,22 @@
                     <TextBlock Margin="4">Магазины</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Sellers.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -197,7 +261,7 @@
                                 <DataGridCheckBoxColumn MinWidth="100" Header="pay delivery" Binding="{Binding PayDeliviry}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </WrapPanel>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -205,10 +269,22 @@
                     <TextBlock Margin="4">Товары</TextBlock>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel>
-                        <StackPanel>
-                            <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
-                        </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
+                                    <Image Height="24" Stretch="Fill" Source="/imgs/refresh.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Products.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -236,7 +312,7 @@
                                 <DataGridTextColumn Width="*" Header="image" Binding="{Binding Image}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </WrapPanel>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
         </TabControl>

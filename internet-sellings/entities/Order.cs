@@ -16,5 +16,9 @@ namespace internet_sellings.entities
         public string Client_Fullname { get; set; }
         public string Client_Phone { get; set; }
         public bool Accepted { get; set; }
+        public override string ToString()
+        {
+            return Id.ToString();
+        }
     }
 }

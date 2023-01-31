@@ -48,5 +48,10 @@ namespace internet_sellings.windows
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new EntityController();
+        }
     }
 }
