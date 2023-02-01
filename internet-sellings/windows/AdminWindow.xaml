@@ -6,12 +6,17 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
+        MinWidth="800"
+        MinHeight="555"
         Title="Интернет-продажи. Администратор" Height="555" Width="800" WindowStartupLocation="CenterScreen" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
     </Window.DataContext>
     <Window.Resources>
         <CollectionViewSource x:Key="Orders_Items" Source="{Binding Orders.BindingList}" />
+        <CollectionViewSource x:Key="Products_Items" Source="{Binding Products.BindingList}" />
+        <CollectionViewSource x:Key="Sellers_Items" Source="{Binding Sellers.BindingList}"/>
+        <CollectionViewSource x:Key="Roles_Items" Source="{Binding Roles.BindingList}" />
     </Window.Resources>
     <Grid Margin="32">
         <Grid.ColumnDefinitions>
@@ -52,6 +57,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Users.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -61,10 +70,10 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Width="*" Header="Login" Binding="{Binding Login}"/>
-                                <DataGridTextColumn Width="*" Header="Password" Binding="{Binding Password}"/>
-                                <DataGridTextColumn Width="*" Header="Role Id" Binding="{Binding Role_Id}"/>
+                                <DataGridTextColumn Width="*" Header="name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Width="*" Header="login" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Width="*" Header="password" Binding="{Binding Password}"/>
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Roles_Items}}" Width="*" Header="role" DisplayMemberPath="Name" SelectedItemBinding="{Binding Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -91,6 +100,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Roles.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Roles.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="50" Header="id" Binding="{Binding Id}"/>
@@ -121,6 +134,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Orders.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Orders.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -159,6 +176,10 @@
                         <StackPanel>
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding OrderProducts.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding OrderProducts.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -168,9 +189,9 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridComboBoxColumn Width="*" Header="order_id" SelectedItemBinding="{Binding Order}" />
-                                <DataGridTextColumn Width="*" Header="product id" Binding="{Binding Product_Id}"/>
-                                <DataGridTextColumn Width="*" Header="seller id" Binding="{Binding Seller_Id}"/>
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Orders_Items}}" SelectedItemBinding="{Binding Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Id"  Width="*" Header="order_id"/>
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Products_Items}}" SelectedItemBinding="{Binding Product, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Width="*" Header="product id"/>
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Sellers_Items}}" SelectedItemBinding="{Binding Seller, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Width="*" Header="seller id"/>
                                 <DataGridTextColumn Width="100" Header="count" Binding="{Binding Count}"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -198,6 +219,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Deliveries.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -207,7 +232,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Orders_Items}}" SelectedItemBinding="{Binding Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="order_id"/>
+                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource Orders_Items}}" DisplayMemberPath="Id" SelectedItemBinding="{Binding Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="order_id"/>
                                 <DataGridTemplateColumn Width="100" Header="delivery datetime">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -248,6 +273,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Sellers.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Sellers.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">
@@ -257,6 +286,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="*" Header="name" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Width="*" Header="email" Binding="{Binding Email}"/>
                                 <DataGridCheckBoxColumn MinWidth="100" Header="pay delivery" Binding="{Binding PayDeliviry}"/>
                             </DataGrid.Columns>
@@ -276,8 +306,10 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                                <TextBox Width="200" Margin="0, 8"/>
+                                <Button FontWeight="Bold" Margin="0,8" Width="26">X</Button>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <Button Click="Refresh" Background="{x:Null}" Margin="8" BorderBrush="{x:Null}">
@@ -285,6 +317,10 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Products.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Products.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">

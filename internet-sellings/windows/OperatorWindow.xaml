@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
+        MinWidth="800"
+        MinHeight="555"
         Title="Интернет продажи. Оператор" Height="450" WindowStartupLocation="CenterScreen" Width="800" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
@@ -35,6 +37,10 @@
                     <WrapPanel>
                         <StackPanel>
                             <Button Click="SaveChanges"  Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label VerticalAlignment="Center">Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Orders.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="false" ItemsSource="{Binding Orders.BindingList}">
                             <DataGrid.Columns>
@@ -71,8 +77,10 @@
                 </TabItem.Header>
                 <TabItem.Content>
                     <WrapPanel>
-                        <StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <Button Click="SaveChanges" Padding="12, 4" Margin="8" Background="#FF339AF0" Foreground="Black" BorderThickness="2" FontWeight="Bold" FontFamily="Calibri" BorderBrush="Black">Сохранить изменения</Button>
+                            <Label VerticalAlignment="Center">Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding OrderProducts.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding OrderProducts.BindingList}">
                             <DataGrid.Columns>
@@ -108,7 +116,10 @@
                                 <CheckBox VerticalAlignment="Center" Click="CheckBox_Click">delivered</CheckBox>
                             </StackPanel>
                         </Grid>
-                            
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Deliveries.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">

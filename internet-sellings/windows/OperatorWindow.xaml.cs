@@ -59,7 +59,7 @@ namespace internet_sellings.windows
             
             if ((bool)checkBox.IsChecked)
             {
-                EntityController.Deliveries.Search(x => x.Delivered && (bool)checkBox.IsChecked);
+                EntityController.Deliveries.Where(x => x.Delivered && (bool)checkBox.IsChecked);
                 return;
             }
 

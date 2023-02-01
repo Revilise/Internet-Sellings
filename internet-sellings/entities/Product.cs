@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace internet_sellings.entities
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Producer { get; set; }
         public string Model { get; set; }

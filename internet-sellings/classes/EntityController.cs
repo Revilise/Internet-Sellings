@@ -40,6 +40,5 @@ namespace internet_sellings.classes
         public SellerCollection Sellers { get; private set; }
         public ProductCollection Products { get; private set; }
         public DeliveryCollection Deliveries { get; private set; }
-
     }
 }

@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="classes\EntityController.cs" />
+    <Compile Include="entities\BaseEntity.cs" />
     <Compile Include="entities\collections\DeliveryCollection.cs" />
     <Compile Include="entities\collections\IEFCollection.cs" />
     <Compile Include="entities\collections\OrderCollection.cs" />
@@ -148,6 +149,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

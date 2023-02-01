@@ -56,11 +56,7 @@ namespace internet_sellings.windows
         {
             CheckBox checkBox = (CheckBox)sender;
 
-            BindingList<Delivery> d = new BindingList<Delivery>(
-                db.Deliveries.Where(x => x.Delivered && (bool)checkBox.IsChecked).ToList()
-            );
-
-            EntityController.Deliveries.BindingList = (bool)checkBox.IsChecked ? d : db.Deliveries.Local.ToBindingList();
+            if ((bool)checkBox.IsChecked) EntityController.Deliveries.Where(x => x.Delivered);
         }
 
         private void SaveCurrantRowToPdf_Click(object sender, RoutedEventArgs e)

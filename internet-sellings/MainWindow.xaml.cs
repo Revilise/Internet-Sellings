@@ -31,7 +31,6 @@ namespace internet_sellings
             db.Users.Load();
             db.Roles.Load();
         }
-
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             try

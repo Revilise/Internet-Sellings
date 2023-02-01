@@ -8,8 +8,17 @@ using System.Windows;
 
 namespace internet_sellings.classes
 {
+    /// <summary>
+    /// Фабрика для создания объектов Window.
+    /// </summary>
     public class WindowFabric
     {
+        /// <summary>
+        /// Генерация объекта Window в зависимости от роли пользователя.
+        /// </summary>
+        /// <param name="userRole">Наименование роли пользователя.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Неожиданная роль пользователя.</exception>
         static public Window CreateWindow(string userRole)
         {
             Window window;

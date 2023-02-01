@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace internet_sellings.entities
 {
-    public class Order_Product
+    public class Order_Product : BaseEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int Order_Id { get; set; }
         [ForeignKey("Order_Id")]
         public Order Order { get; set; }

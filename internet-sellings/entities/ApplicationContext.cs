@@ -14,8 +14,7 @@ namespace internet_sellings.entities
     public class ApplicationContext : DbContext
     {
         static private ApplicationContext Instance;
-        private ApplicationContext() 
-            : base(ConfigurationManager.ConnectionStrings["db_connection"].ConnectionString) {}
+        private ApplicationContext() : base(ConfigurationManager.ConnectionStrings["db_connection"].ConnectionString) {}
         static public ApplicationContext GetInstance()
         {
             if (Instance == null) Instance = new ApplicationContext();

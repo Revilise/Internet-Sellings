@@ -51,7 +51,7 @@ namespace internet_sellings.windows
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new EntityController();
+           //todo represh
         }
     }
 }

@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:internet_sellings.windows"
         xmlns:classes="clr-namespace:internet_sellings.classes"
         mc:Ignorable="d"
+        MinWidth="800"
+        MinHeight="555"
         Title="Интернет-продажи. Курьер" Height="450" WindowStartupLocation="CenterScreen" Width="800" Icon="/imgs/internet.ico">
     <Window.DataContext>
         <classes:EntityController />
@@ -44,7 +46,10 @@
                                 <CheckBox VerticalAlignment="Center" Click="CheckBox_Click">delivered</CheckBox>
                             </StackPanel>
                         </Grid>
-
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Всего записей:</Label>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Deliveries.BindingList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                         <DataGrid x:Name="dvg" AutoGenerateColumns="False" ItemsSource="{Binding Deliveries.BindingList}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="50" Header="id">

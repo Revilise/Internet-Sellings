@@ -1,4 +1,5 @@
-﻿using System;
+﻿using internet_sellings.classes;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace internet_sellings.entities.collections
 {
     public class RoleCollection : EFCollection<Role>
     {
-        public RoleCollection(DbSet<Role> set) : base(set) => this.BindingList = set.Local.ToBindingList();
+        public RoleCollection(DbSet<Role> set) : base(set)
+        {
+            this.BindingList = set.Local.ToBindingList();
+            this.BindingList.ListChanged += CollectionChanged;
+        }
     }
 }

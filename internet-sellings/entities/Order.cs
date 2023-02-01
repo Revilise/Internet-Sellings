@@ -8,17 +8,11 @@ using System.Threading.Tasks;
 
 namespace internet_sellings.entities
 {
-    public class Order
+    public class Order : BaseEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public DateTime Created_dt { get; set; } = DateTime.Now;
         public string Client_Fullname { get; set; }
         public string Client_Phone { get; set; }
         public bool Accepted { get; set; }
-        public override string ToString()
-        {
-            return Id.ToString();
-        }
     }
 }

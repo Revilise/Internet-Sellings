@@ -1,4 +1,5 @@
-﻿using System;
+﻿using internet_sellings.classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace internet_sellings.entities.collections
 {
-    public abstract class EFCollection<T> : INotifyPropertyChanged
+    public abstract class EFCollection<T> : INotifyPropertyChanged where T : BaseEntity
     {
         public DbSet Entity;
         public EFCollection(DbSet set)
@@ -24,14 +25,26 @@ namespace internet_sellings.entities.collections
                 OnPropetryChanged("BindingList");
             }
         }
-        
+        public void CollectionChanged(object sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemAdded:
+                    this.BindingList[e.NewIndex].Id = this.Entity.Local.Count + 1;
+                    break;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public void OnPropetryChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-        public void Search(Func<T, bool> predicate)
+        /// <summary>
+        /// Поиск значений в BindingList по предикату. Изменяет текущий BindingList в соответствии с условием predicate
+        /// </summary>
+        /// <param name="predicate">Условие фильтрации</param>
+        public void Where(Func<T, bool> predicate)
         {
             this.BindingList = new BindingList<T>(
                 this.BindingList.Where(predicate).ToList()
