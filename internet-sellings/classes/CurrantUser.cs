@@ -31,7 +31,14 @@ namespace internet_sellings.classes
         /// <returns>true - пользователь авторизирован. False - пользователь не авторизирован.</returns>
         public bool IsLogged(bool logout = false)
         {
-            if (logout) Instance = new CurrantUser();
+            if (logout) {
+                Instance.Id = 0;
+                Instance.Name = null;
+                Instance.Login = null;
+                Instance.Name = null;
+                Instance.Role = null;
+                Instance.Role_Id = 0;
+            }
 
             return this.Login != null && this.Role != null && this.Name != null;
         }

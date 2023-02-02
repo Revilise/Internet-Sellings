@@ -16,6 +16,10 @@ namespace internet_sellings.entities.collections
         {
             this.Entity = set;
             this.Entity.Load();
+        }     
+        public void Load()
+        {
+            this.Entity.Load();
         }
         public String Search {
             get => _search; 

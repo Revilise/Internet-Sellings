@@ -14,10 +14,10 @@ namespace internet_sellings.entities
     public class ApplicationContext : DbContext
     {
         static private ApplicationContext Instance;
-        private ApplicationContext() : base(ConfigurationManager.ConnectionStrings["db_connection"].ConnectionString) {}
-        static public ApplicationContext GetInstance()
+        private ApplicationContext(string sqlconn = null) : base(sqlconn == null ? ConfigurationManager.ConnectionStrings["db_connection"].ConnectionString : sqlconn) {}
+        static public ApplicationContext GetInstance(string sqlconn = null)
         {
-            if (Instance == null) Instance = new ApplicationContext();
+            if (Instance == null) Instance = new ApplicationContext(sqlconn);
 
             return Instance;
         }

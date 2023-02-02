@@ -91,7 +91,7 @@ namespace internet_sellings.windows
             table.AddCell(new Phrase("Product name", font));
             table.AddCell(new Phrase("Count", font));
 
-            List<Order_Product> op = EntityController.Instance.OrderProducts.BindingList.Where(x => x.Order_Id == delivery.Order_Id).ToList();
+            List<Order_Product> op = (new EntityController()).OrderProducts.BindingList.Where(x => x.Order_Id == delivery.Order_Id).ToList();
             int row = 0;
             foreach (var obj in op)
             {
