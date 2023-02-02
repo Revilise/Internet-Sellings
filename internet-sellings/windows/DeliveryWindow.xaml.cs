@@ -38,6 +38,7 @@ namespace internet_sellings.windows
         {
             this.Close();
             Owner.Show();
+            CurrantUser.GetInstance().IsLogged(true);
         }
         private void SaveChanges(object sender, RoutedEventArgs e)
         {

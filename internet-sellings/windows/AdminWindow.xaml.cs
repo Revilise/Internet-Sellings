@@ -34,6 +34,7 @@ namespace internet_sellings.windows
         {
             this.Close();
             Owner.Show();
+            CurrantUser.GetInstance().IsLogged(true);
         }
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
@@ -51,7 +52,8 @@ namespace internet_sellings.windows
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
-           //todo represh
+          
         }
+
     }
 }

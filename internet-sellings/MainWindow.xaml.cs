@@ -39,7 +39,7 @@ namespace internet_sellings
                     (User)contaier.DataContext
                 );
 
-                if (user == null) throw new Exception("Неверный логин или пароль");
+                if (!user.IsLogged()) throw new Exception("Неверный логин или пароль");
 
                 Role role = db.Roles.First(r => r.Id == user.Role_Id);
                 Window window = WindowFabric.CreateWindow(role.Name);

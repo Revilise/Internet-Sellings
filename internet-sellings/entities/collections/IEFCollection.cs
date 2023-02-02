@@ -17,6 +17,13 @@ namespace internet_sellings.entities.collections
             this.Entity = set;
             this.Entity.Load();
         }
+        public String Search {
+            get => _search; 
+            set {
+                _search = value;
+                OnPropetryChanged("Search");
+            }
+        }
         public BindingList<T> BindingList {
             get => _bindingList;
             set
@@ -47,9 +54,10 @@ namespace internet_sellings.entities.collections
         public void Where(Func<T, bool> predicate)
         {
             this.BindingList = new BindingList<T>(
-                this.BindingList.Where(predicate).ToList()
+                this.Entity.Cast<T>().Where(predicate).ToList()
             );
         }
+        
         public void RefreshBindingList()
         {
             this.Entity.Load();
@@ -60,5 +68,6 @@ namespace internet_sellings.entities.collections
         }
 
         private BindingList<T> _bindingList;
+        protected string _search;
     }
 }
