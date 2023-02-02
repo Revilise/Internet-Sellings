@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿  using Microsoft.VisualStudio.TestTools.UnitTesting;
 using internet_sellings.classes;
 using internet_sellings.entities;
 using internet_sellings.windows;
@@ -32,6 +32,7 @@ namespace Internet_Sellings_MSTesting
 
             Assert.IsTrue(user.IsLogged());
         }
+
         [TestMethod]
         public void LogOutUser()
         {
@@ -76,13 +77,46 @@ namespace Internet_Sellings_MSTesting
         [TestMethod]
         public void UpdateUser()
         {
+            User user = EntityController.Users.BindingList.FirstOrDefault(x => x.Login == "tested-user");
 
+            if (user == null)
+            {
+                AddUser();
+                user = EntityController.Users.BindingList.FirstOrDefault(x => x.Login == "tested-user");
+            }
+
+            user.Login = "Updated-user";
+            db.SaveChanges();
+
+            User actual = EntityController.Users.BindingList.FirstOrDefault(
+               x => x.Login == user.Login
+            );
+
+            User deleted = EntityController.Users.BindingList.FirstOrDefault(
+                x => x.Login == "tested-user"
+            );
+
+            Assert.AreEqual(user, actual);
+            Assert.IsNull(deleted);
         }
 
         [TestMethod]
         public void DeleteUser()
         {
+            User user = EntityController.Users.BindingList.FirstOrDefault(x => x.Login == "tested-user");
 
+            if (user == null)
+            {
+                AddUser();
+                user = EntityController.Users.BindingList.FirstOrDefault(x => x.Login == "tested-user");
+            }
+
+            EntityController.Users.BindingList.Remove(user);
+            db.SaveChanges();
+
+            User deleted = EntityController.Users.BindingList.FirstOrDefault(x => user.Id == x.Id);
+
+            Assert.IsNull(deleted);
         }
 
         [TestMethod]
@@ -111,17 +145,48 @@ namespace Internet_Sellings_MSTesting
 
             Assert.IsNotNull(actual);
         }
-
-        [TestMethod] 
-        public void DeleteRole()
-        {
-
-        }
-
         [TestMethod]
         public void UpdateRole()
         {
+            Role role = EntityController.Roles.BindingList.FirstOrDefault(x => x.Name == "TEST");
 
+            if (role == null)
+            {
+                AddRole();
+                role = EntityController.Roles.BindingList.FirstOrDefault(x => x.Name == "TEST");
+            }
+
+            role.Name = "UPD-TEST";
+            db.SaveChanges();
+
+            Role actual = EntityController.Roles.BindingList.FirstOrDefault(
+               x => x.Id == role.Id
+            );
+
+            Role deleted = EntityController.Roles.BindingList.FirstOrDefault(
+                x => x.Name == "TEST"
+            );
+
+            Assert.AreEqual(role, actual);
+            
+            Assert.IsNull(deleted);
+        }
+        [TestMethod] 
+        public void DeleteRole()
+        {
+            Role role = EntityController.Roles.BindingList.FirstOrDefault(x => x.Name == "TEST");
+
+            if (role  == null)
+            {
+                AddRole();
+                role  = EntityController.Roles.BindingList.FirstOrDefault(x => x.Name == "TEST");
+            }
+            EntityController.Roles.BindingList.Remove(role);
+            db.SaveChanges();
+
+            User deleted = EntityController.Users.BindingList.FirstOrDefault(x => x.Id == role.Id);
+
+            Assert.IsNull(deleted);
         }
     }
 }
